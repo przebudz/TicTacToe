@@ -151,6 +151,50 @@ public class Game {
     public String checkGameWinner(char [][]grid){
         String result = "None";
         //Student code goes here ...
+        Boolean isEmptyCell = false;
+
+        int i = 0;
+        int j = 0;
+
+        //check for diagonal win
+        if (((grid[0][0] == grid[1][1] && grid[1][1] == grid[2][2]) || (grid[2][0] == grid[1][1] && grid[1][1] == grid[0][2])) && grid[1][1] != '-'){
+            result = String.valueOf(grid[1][1]).toUpperCase() + " wins";
+        }
+
+        //check for row wins
+        if(result.equals("None")) {
+            for (i = 0; i < grid.length; i++) {
+                if (grid[i][0] == grid[i][1] && grid[i][1] == grid[i][2] && grid[i][1] != '-'){
+                    result = String.valueOf(grid[i][0]).toUpperCase() + " wins";
+                    break;
+                }
+            }
+        }
+
+        // check for col wins
+        if(result.equals("None")){
+            for (j = 0; j < grid.length; j++) {
+                if (grid[0][j] == grid[1][j] && grid[1][j] == grid[2][j] && grid[1][j] != '-'){
+                    result = String.valueOf(grid[0][j]).toUpperCase() + " wins";
+                    break;
+                }
+            }
+        }
+
+        //check for tie
+        if (result.equals("None")){
+            for (i=0;i<grid.length;i++){
+                for (j=0;j<grid.length;j++){
+                    if (grid [i][j] == '-'){
+                        isEmptyCell = true;
+                        break;
+                    }
+                }
+            }
+
+            if(!isEmptyCell) result = "Tie";
+        }
+        
         return result;
     }
 
